@@ -1,5 +1,5 @@
 {
-    "name": "nurmanhabib/navigator",
+    "name": "nurmanhabib/message",
     "description": "Generate message alert dengan tampilan bootstrap untuk Laravel",
     "license": "MIT",
     "keywords": ["message","alert"],
