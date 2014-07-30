@@ -6,7 +6,7 @@ class MessageServiceProvider extends ServiceProvider {
 
     public function register()
     {
-        $this->app->bind('Message', function()
+        $this->app->bind('message', function()
         {
             return new Message;
         });
