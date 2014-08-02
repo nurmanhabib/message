@@ -28,7 +28,14 @@ class Message {
         // Jika terdapat pesan error dari Validator
         if(Session::has('errors'))
         {
-            $message['error']   = Session::get('errors')->all();
+            $errors     = Session::get('errors');
+            
+            // Jika errors merupakan object MessageBag
+            if(is_object($errors)) {
+                $message['error']   = $errors->all();
+            } else {
+                $message['error']   = $errors;
+            }
         }
 
         // Jika terdapat pesan success dari Session
