@@ -5,14 +5,14 @@ use Button as Btn;
 
 class Message {
 
-    public $message = array(
+    protected $message = array(
         'success'   => array(),
         'error'     => array(),
         'warning'   => array(),
         'info'      => array(),
     );
 
-    public $options = array(
+    protected $options = array(
         'alert'     => array(
             'type'      => 'danger',
             'inline'    => true,
@@ -114,13 +114,48 @@ class Message {
         return $html;
     }
 
-    public function show()
+    public function set($type, $message)
+    {
+        $this->message[$type] = $message;
+
+        return $this;
+    }
+
+    public function success($message)
+    {
+        return $this->set('success', $message);
+    }
+
+    public function error($message)
+    {
+        return $this->set('danger', $message);
+    }
+
+    public function warning($message)
+    {
+        return $this->set('warning', $message);
+    }
+
+    public function danger($message)
+    {
+        return $this->set('danger', $message);
+    }
+
+    public function info($message)
+    {
+        return $this->set('info', $message);
+    }
+
+    public function show($type = '')
     {        
         $message    = $this->message;
         $html       = '';
 
-        foreach ($message as $type => $text)
-            $html   .= !empty($text) ? $this->alert($text, array('type' => $type)) : '';
+        if (!empty($type))
+            $html   .= !empty($message[$type]) ? $this->alert($message[$type], array('type' => $type)) : '';
+        else
+            foreach ($message as $type => $text)
+                $html   .= !empty($text) ? $this->alert($text, array('type' => $type)) : '';
 
         return $html;
     }
